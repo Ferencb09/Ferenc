@@ -1,19 +1,19 @@
 // Config
-let timeSpeed = 2000   //Default = 2000     Time is by miliseconds (how many miliseconds per in-game minute)
+let timeSpeed = 2000;   //Default = 2000     Time is by miliseconds (how many miliseconds per in-game minute)
 
 // Variable's & Array's
 
 // Stats
 
-let energy = 100
+let energy = 100;
 
-let food = 100
+let food = 100;
 
-let thirst = 100
+let thirst = 100;
 
-let health = 100
+let health = 100;
 
-let cash = 10
+let cash = 10;
 
 // Time
 
@@ -23,23 +23,33 @@ let clockX = 1450;
 
 // Time
 let previousTime = 0;
-let timeMin = 0
-let timeHour = 7
-let currentDay = 0
+let timeMin = 0;
+let timeHour = 7;
+let currentDay = 0;
 
 // Digital Clock
-let digitalClockMinutesTextX = 0
-let digitalClockHoursTextX = 0
+let digitalClockMinutesTextX = 0;
+let digitalClockHoursTextX = 0;
+
+// Real life Date
+
+let currentYear;
+let m;
+let d;
+
+let h;
+let min;
+let s;
 
 
 // functions
 
-let confirmation = false
-let Cyes = 195
-let Cno = 195
-let WarningText = "Error!"
-let WarningTime = 0
-let barY = 1020
+let confirmation = false;
+let Cyes = 195;
+let Cno = 195;
+let WarningText = "Error!";
+let WarningTime = 0;
+let barY = 1020;
 
 
 
@@ -55,10 +65,21 @@ function setup() {
   health = getItem("Health")
 
   cash = cash * 10
+  
 }
 
 
 function draw() {
+  // update IRL time
+  currentYear = year();
+  m = month();
+  d = day();
+  
+  h = hour();
+  min = minute();
+  s = second();
+  textAlign(LEFT, BASELINE);
+  textStyle(NORMAL);
 let hoekMin = map(timeMin, 0, 60, -90, 270);
 let hoekHour = map((timeHour % 12) + timeMin / 60, 0, 12, -90, 270);
 
@@ -399,10 +420,10 @@ if(confirmation == true) {fill(255)}
 stroke(0)
 strokeWeight(0)
 textSize(20)
-text("mouseX: " +  mouseX, 100, 200)
-text("mouseY: " +  mouseY, 100,220)
+// text("mouseX: " +  mouseX, 100, 200)
+// text("mouseY: " +  mouseY, 100,220)
 
-
+// pop-up bar
 
 if(mouseY >= 800 && barY >= 900){
   barY -= 20
@@ -410,18 +431,23 @@ if(mouseY >= 800 && barY >= 900){
 else if(mouseY <= 800 && barY <= 1020) {barY += 10}
 else if(barY < 900 && mouseY <= 800) {barY = 900}
 
+fill(50)
+
 rect(0,barY,1850,200)
 
 fill(200)
-rect(20,barY+10,160,110,30)
-rect(190,barY+20,110,90,20)
-rect(310,barY+20,110,90,20)
-rect(430,barY+20,110,90,20)
+rect(20,barY+10,560,110,100)
 
+// Real Life Date
+textSize(32);
+textStyle(BOLD);
+textAlign(LEFT, CENTER);
+fill(0)
+text(d + "/" + m + "/" + currentYear, 180, barY+65);
+text(nf(h, 2) + ":" + nf(min, 2) + ":" + nf(s, 2), 370, barY+65);
 
-
-
-
+fill(150)
+rect(25,barY+15,120,100,100)
 
 
 
@@ -448,7 +474,7 @@ if(mouseX >= 1800 && mouseX <= 1850 && mouseY >= 0 && mouseY <= 50){
 
 if(confirmation == false){
 
-if(mouseX >= 40 && mouseX <= 440 && mouseY >= 250 && mouseY <= 350 && (timeHour <= 6 || timeHour >= 20) && energy <= 50){
+if(mouseX >= 40 && mouseX <= 440 && mouseY >= 250 && mouseY <= 350 && (timeHour <= 6 || timeHour >= 20) && energy <= 100){
   energy = 100
   timeHour = 7
   timeMin = 0
@@ -531,5 +557,10 @@ if(confirmation == true && Cyes == 255 && health == 100){
   Cyes = 195
   Cno = 195
 }
+
+// Time Control
+
+
+
 
 }
