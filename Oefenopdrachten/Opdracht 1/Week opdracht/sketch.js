@@ -1,5 +1,3 @@
-let circleWidth = 200; 
-
 function setup() {
   createCanvas(2000, 2000);
   noFill();
