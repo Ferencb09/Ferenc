@@ -1,21 +1,34 @@
 let x = 1
 let y = 1
-let licht; // 0 rood, 1 oranje, 2 groen
+let licht = 0 // 0 rood, 1 oranje, 2 groen
+let tick = 0
+let sunPositionX = -200
+let backgroundColor = 255 
+let daytimeSpeed = 0.5
 
+let stoplicht = 565
+let manualModeActive = 0
 
 //auto
-let auto1x = 200
+let auto1x = -300
 let auto1y = 800
-
+let speedOfCar = 10
+let carColor1 = 255
 function setup() {
   createCanvas(1855, 1000);
-  licht = 2
 }
 
 function draw() {
+  fill(0)
+  text(tick, 50, 100)
   background('skyblue');
   x += 1;
   strokeWeight(0);
+  tick += 1
+
+// Wolken
+
+
   
   // Bergen & Grasveld
   
@@ -83,6 +96,22 @@ rect(1200,665,50,35)
 
 
 // StopLicht
+if(manualModeActive == 0){if (tick == 500) {
+  licht = 1
+}
+else if(tick == 600){
+  licht = 2
+}
+else if(tick == 1500){
+  licht = 0
+}
+else if(tick == 2500){
+  tick = 0
+  licht = 0
+}
+}
+
+
 fill(170)
 rect(1500, 710, 40, 65)
 rect(1480, 530, 80, 200)
@@ -97,14 +126,38 @@ else if (licht == 1) {
 else if(licht == 2){
   fill('green')
 }
-circle(100, 100, 100)
+
+
+fill(0,40,0)
+circle(1520,685,50)
+
+fill(90,40,0)
+circle(1520,625,50)
+
+fill(60,0,0)
+circle(1520,565,50)
+
+if (licht == 2) {
+  stoplicht = 565
+  fill(255,0,0)
+}
+else if(licht == 1) {
+  stoplicht = 625
+  fill('yellow')
+}
+else{
+  stoplicht = 685
+  fill(0,255,0)
+}
+circle(1520, stoplicht, 51)
+
+
 
 // auto's
 
-auto1x = auto1x + 1
+auto1x = auto1x + speedOfCar
 
-
-fill('white')
+fill(carColor1);
 
 rect(auto1x,auto1y,300,100);
 rect(auto1x+70, auto1y-70, 150, 70)
@@ -115,24 +168,68 @@ fill(0)
 circle(auto1x+50, auto1y+100, 70)
 circle(auto1x+250, auto1y+100, 70)
 
-
-
-
-
-
-
-
+if (auto1x >= 1900) {
+  auto1x = -300
+  carColor1 = color(random(40,255),random(40,255),random(40,255));
+}
   text(licht,10,20);
 
+if (auto1x == 1150 && licht == 2) {
+  speedOfCar = 0
+}
+if(licht == 0) {
+  speedOfCar = 10
+}
+strokeWeight(0)
+fill(102, 49, 13)
+rect(1100,910,30,80);
+fill('darkgreen')
+ellipse(1113, 865,100,150)
+
+
+sunPositionX = sunPositionX + daytimeSpeed
+fill('yellow')
+circle(sunPositionX, 100, 100);
+text(sunPositionX, 200, 10);
+if (sunPositionX > 2200) {
+  sunPositionX = -200
+  
+}
+// square(1150,800,20)
+fill(0)
+text("Press M to enable/disable traffic light manual mode", 1570, 20)
+if (manualModeActive == 1) {
+  fill(0,195,0)
+  text ("Manual Mode Enabled", 1570, 35)
+    fill(0)
+  text("Press 'Enter' to change traffic light", 1570, 50)
+}
+else if(manualModeActive == 0){
+  fill(195,0,0)
+  text("Manual Mode Disabled", 1570, 35)
+
+}
 }
 
 function keyPressed() {
-  if (key === 'Enter') {
+  if (key === 'Enter' && manualModeActive == 1) {
     if (licht === 0) {
+      licht = 1
+    } 
+    else if(licht == 2){
+      licht = 0
+    }
+    else {
       licht = 2
+    }
+  }
+
+   if(key === 'm') {
+    if(manualModeActive == 1) {
+      manualModeActive = 0
     } else {
-      licht--
+      manualModeActive = 1
     }
   }
 }
-x += 1;
+
