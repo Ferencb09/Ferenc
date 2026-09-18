@@ -32,8 +32,6 @@ function draw() {
   strokeWeight(0);
   tick += 1
 
-  text(wolk1x, 100, 100)
-
 // Wolken
 
 
@@ -197,7 +195,6 @@ if (auto1x >= 1900) {
   auto1x = -300
   carColor1 = color(random(40,255),random(40,255),random(40,255));
 }
-  text(licht,10,20);
 
 if (auto1x == 1150 && licht == 2) {
   speedOfCar = 0
@@ -220,7 +217,6 @@ ellipse(1112, 865,100,150)
 sunPositionX = sunPositionX + daytimeSpeed
 fill('yellow')
 circle(sunPositionX, 100, 100);
-text(sunPositionX, 200, 10);
 if (sunPositionX > 2200) {
   sunPositionX = -200
   
@@ -250,8 +246,6 @@ rect(wolk1x, wolk1y-1, 130, 51);
 if (wolk1x < -300) {
   wolk1x = 2000
 }
-text(auto1x, 150, 100)
-text(speedOfCar, 150, 110)
 }
 
 function keyPressed() {
