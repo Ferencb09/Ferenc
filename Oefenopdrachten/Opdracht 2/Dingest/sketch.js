@@ -9,6 +9,12 @@ let daytimeSpeed = 0.5
 let stoplicht = 565
 let manualModeActive = 0
 
+// Wolk
+let wolk1x = 2000
+let wolk1y = 200
+let cloudSpeed = 2
+
+
 //auto
 let auto1x = -300
 let auto1y = 800
@@ -25,6 +31,8 @@ function draw() {
   x += 1;
   strokeWeight(0);
   tick += 1
+
+  text(wolk1x, 100, 100)
 
 // Wolken
 
@@ -95,6 +103,21 @@ rect(1200,665,50,35)
   rect(1800,860,50,10);
 
 
+  // bomen
+  fill(102, 49, 13)
+rect(500,690,30,80);
+rect(700,690,30,80);
+rect(300,680,30,80);
+rect(100,690,30,80);
+rect(900,690,30,80);
+fill('darkgreen')
+ellipse(514, 650,100,130)
+ellipse(714, 650,100,140)
+ellipse(314, 670,100,110)
+ellipse(114, 650,100,160)
+ellipse(914, 650,100,160)
+
+
 // StopLicht
 if(manualModeActive == 0){if (tick == 500) {
   licht = 1
@@ -117,15 +140,7 @@ rect(1500, 710, 40, 65)
 rect(1480, 530, 80, 200)
 
 
-if (licht == 0) {
-  fill('red')
-}
-else if (licht == 1) {
-  fill('orange')
-}
-else if(licht == 2){
-  fill('green')
-}
+
 
 
 fill(0,40,0)
@@ -151,11 +166,21 @@ else{
 }
 circle(1520, stoplicht, 51)
 
+if (licht == 0) {
+  fill('red')
+}
+else if (licht == 1) {
+  fill('orange')
+}
+else if(licht == 2){
+  fill('green')
+}
+
 
 
 // auto's
 
-auto1x = auto1x + speedOfCar
+auto1x += speedOfCar
 
 fill(carColor1);
 
@@ -177,14 +202,19 @@ if (auto1x >= 1900) {
 if (auto1x == 1150 && licht == 2) {
   speedOfCar = 0
 }
+
 if(licht == 0) {
   speedOfCar = 10
 }
+if(licht == 1){
+  speedOfCar = 5
+}
+
 strokeWeight(0)
 fill(102, 49, 13)
 rect(1100,910,30,80);
 fill('darkgreen')
-ellipse(1113, 865,100,150)
+ellipse(1112, 865,100,150)
 
 
 sunPositionX = sunPositionX + daytimeSpeed
@@ -209,6 +239,19 @@ else if(manualModeActive == 0){
   text("Manual Mode Disabled", 1570, 35)
 
 }
+fill(255)
+wolk1x = wolk1x - cloudSpeed
+
+
+circle(wolk1x, wolk1y, 100);
+circle(wolk1x+60, wolk1y-50, 100);
+circle(wolk1x+120, wolk1y, 100);
+rect(wolk1x, wolk1y-1, 130, 51);
+if (wolk1x < -300) {
+  wolk1x = 2000
+}
+text(auto1x, 150, 100)
+text(speedOfCar, 150, 110)
 }
 
 function keyPressed() {
