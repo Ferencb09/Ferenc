@@ -1,5 +1,5 @@
 
-let speed = 50 // Set the speed of the circle.
+let speed = 20 // Set the speed of the circle.
 
 
 
