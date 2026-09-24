@@ -9,6 +9,10 @@ let target = 180;
 
 // Hier niet aan zitten!
 
+let blueWins
+let redWins
+
+
 let backgroundcirclesize = 1500
 let turn = 1 // Blue = 1 Red = 2
 
@@ -37,6 +41,7 @@ let b9c = 255
 
 let redwon = 0
 let bluewon = 0
+let nooneWon = 0
 
 let ongoingGame = 1
 let homeScreen = 1
@@ -58,16 +63,16 @@ function draw() {
   circle(900,500,backgroundcirclesize)
   }
  
-  fill(0)
-  circle(900,500,1450)
-  fill(190)
-  square(600, 200, 620, 10)
-  fill(255)
-  textSize(120)
+  fill(0);
+  circle(900,500,1450);
+  fill(190);
+  square(600, 200, 620, 10);
+  fill(255);
+  textSize(120);
 
-  textFont("georgia")
-  text("Tic-Tac-Toe", 590,170)
-  strokeWeight(5)
+  textFont("georgia");
+  text("Tic-Tac-Toe", 590,170);
+  strokeWeight(5);
 
 
 
@@ -92,7 +97,11 @@ function draw() {
   fill(b9c)
   square(1020 , 620, grooteVierkanten, 10)
 
-if(ongoingGame == 1) {
+
+  // Hover Effect
+  
+  if(ongoingGame == 1) {
+
   //Eerste Rij
 
   if (mouseX > 620 && mouseX < 800 && mouseY > 220 && mouseY < 400) {
@@ -170,6 +179,8 @@ if (turn == 1) {
 }
 
 strokeWeight(15)
+
+// Icons
 
 if(block1 == 2){
   stroke('red')
@@ -281,7 +292,7 @@ else if(turn == 2){
   stroke('red')
 }
 
-
+// BLue Won
 if(block1 == 1 && block2 == 1 && block3 == 1){
   stroke(0)
   strokeWeight(20)
@@ -412,7 +423,12 @@ if(block3 == 2 && block5 == 2 && block7 == 2){
   ongoingGame = 0
 }
 
-if(block1 != 0 && block2 != 0 && block3 != 0, block4 != 0 && block5 != 0 && block6 != 0, block7 != 0 && block8 != 0 && block9 != 0 && bluewon == 0, redwon == 0){
+if(block1 != 0 && block2 != 0 && block3 != 0 && block4 != 0 && block5 != 0 && block6 != 0 && block7 != 0 && block8 != 0 && block9 != 0 && bluewon === 0 && redwon === 0){
+  nooneWon = 1
+  turn = 0
+  ongoingGame = 0
+}
+if(nooneWon === 1){
   stroke(175)
   strokeWeight(10)
   fill(255)
@@ -422,8 +438,8 @@ if(block1 != 0 && block2 != 0 && block3 != 0, block4 != 0 && block5 != 0 && bloc
   strokeWeight(2)
   fill(0)
   text("Draw", 105,155)
-  turn = 0
 }
+else{}
 
 
 if(redwon == 1){
@@ -484,8 +500,8 @@ else{quitColor = 200}
 
 
 
-
-
+fill (255)
+text(nooneWon, 200, 100)
 textSize(15)
 text(turn, 200, 50)
 }
@@ -614,6 +630,7 @@ if(playAgainColor == 255){
   block7 = 0
   block8 = 0
   block9 = 0
+  nooneWon = 0
   
 }
 
