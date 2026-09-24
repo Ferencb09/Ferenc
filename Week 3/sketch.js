@@ -1,13 +1,21 @@
-let spelerAanDeBeurt
-let welkeKleurPerBlokje
+// Config
+
+let spelerAanDeBeurt;
+let welkeKleurPerBlokje;
 let grooteVierkanten = 180
 let target = 180;
 
-
+let RGB_Speed = 6;
 
 
 
 // Hier niet aan zitten!
+
+let colorR = 255
+let colorG = 0
+let colorB = 0
+
+
 
 let blueWins
 let redWins
@@ -51,6 +59,37 @@ function setup() {
 }
 
 function draw() {
+// RGB?
+
+
+if (colorR <= 255 && colorB <= 0) {
+  colorB = 0
+  colorR -= RGB_Speed / 2
+  colorG += RGB_Speed
+  if (colorG > 255) {
+    colorG = 255
+  }
+}
+
+if (colorG <= 255 && colorR <= 0) {
+  colorR = 0
+  colorG -= RGB_Speed / 2
+  colorB += RGB_Speed
+  if (colorB > 255) {
+    colorB = 255
+  }
+}
+
+if (colorB <= 255 && colorG <= 0) {
+  colorG = 0
+  colorB -= RGB_Speed / 2
+  colorR += RGB_Speed
+  if (colorR > 255) {
+    colorR = 255
+  }
+}
+  fill(175)
+  
   background(0);
   strokeWeight(0)
    if(redwon == 1 || turn == 2){
@@ -65,14 +104,16 @@ function draw() {
  
   fill(0);
   circle(900,500,1450);
-  fill(190);
+  fill(255);
   square(600, 200, 620, 10);
   fill(255);
   textSize(120);
 
   textFont("georgia");
   text("Tic-Tac-Toe", 590,170);
-  strokeWeight(5);
+  stroke(colorR, colorG, colorB)
+  strokeWeight(8);
+  
 
 
 
@@ -169,7 +210,7 @@ else{
 
 textSize(15)
 fill(255)  
- text(`x: ${int(mouseX)} y: ${int(mouseY)}`, 50, 50);
+// text(`x: ${int(mouseX)} y: ${int(mouseY)}`, 50, 50);
 
 
 if (turn == 1) {
@@ -437,7 +478,7 @@ if(nooneWon === 1){
   textSize(45)
   strokeWeight(2)
   fill(0)
-  text("Draw", 105,155)
+  text("Draw", 250,255)
 }
 else{}
 
@@ -451,7 +492,7 @@ if(redwon == 1){
   textSize(45)
   strokeWeight(2)
   fill(0)
-  text("Red won the match!", 105,155)
+  text("Red won the match!", 105,255)
   turn = 2
 }
 
@@ -500,10 +541,10 @@ else{quitColor = 200}
 
 
 
-fill (255)
-text(nooneWon, 200, 100)
-textSize(15)
-text(turn, 200, 50)
+//fill (255)
+//text(nooneWon, 200, 100)
+//textSize(15)
+//text(turn, 200, 50)
 }
 
 
