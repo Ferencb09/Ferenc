@@ -55,7 +55,7 @@ let ongoingGame = 1
 let homeScreen = 1
 
 function setup() {
-  createCanvas(1850, 1000);
+  createCanvas(1920, 1080);
 }
 
 function draw() {
