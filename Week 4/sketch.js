@@ -1,37 +1,53 @@
-
-let speed = 5
-
-
-
 function setup() {
-  createCanvas(800, 800);
+  createCanvas(800, 600);
+  maakKunst();
 }
 
-let r = 0;
-let g = 0;
-let b = 0;
+function maakKunst() {
+  background(255);
 
-let n = 0;
+  for (let i = 0; i < 100; i++) {
+    let x = random(width);
+    let y = random(height);
 
+    let kleurR = random(255);
+    let kleurG = random(255);
+    let kleurB = random(255);
 
-function draw() {
-  background(0);
+    fill(kleurR, kleurG, kleurB);
+    noStroke();
 
-if(r <= 255 && n == 0){
-  r += speed
-}
-else if(r >= 200){
-  g += speed
-}
-else if(r >= 255){
-  n = 1
-  r -= speed
-}
+    let vorm = floor(random(4));
 
-for(let i = 0; i < 80; i++){
-  for(let j = 0; j < 80; j++){
-    fill(r, g, b)
-    ellipse(i * 10 + 5, j * 10 + 5, 10, 10)
+    if (vorm == 0) {
+      let grootte = random(10, 150);
+      circle(x, y, grootte);
+    }
+
+    else if (vorm == 1) {
+      let breedte = random(10, 150);
+      let hoogte = random(10, 150);
+      rect(x, y, breedte, hoogte);
+    }
+
+    else if (vorm == 2) {
+      let grootte = random(20, 150);
+
+      triangle(
+        x, y - grootte,
+        x - grootte, y + grootte,
+        x + grootte, y + grootte
+      );
+    }
+
+    else {
+      let breedte = random(20, 150);
+      let hoogte = random(20, 100);
+      ellipse(x, y, breedte, hoogte);
+    }
   }
 }
+
+function keyPressed() {
+  maakKunst();
 }
