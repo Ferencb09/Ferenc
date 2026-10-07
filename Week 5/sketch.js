@@ -47,6 +47,9 @@ function preload() {
   Images.push(loadImage("Afbeeldingen/flag.jpg"))
   Images.push(loadImage("Afbeeldingen/border.jpg"))
   ImagesSel.push(loadImage("Afbeeldingen/logosel.jpg"))
+  ImagesSel.push(loadImage("Afbeeldingen/gameplaysel.jpg"))
+  ImagesSel.push(loadImage("Afbeeldingen/flagsel.jpg"))
+  ImagesSel.push(loadImage("Afbeeldingen/bordersel.jpg"))
   Images.push(loadImage("Afbeeldingen/logo/Xiaomi.png"))
 }
 
@@ -153,6 +156,43 @@ if(selectedA == 1){
   text("Easy", 1060, 350)
   playButton()
 }
+if(selectedB == 1){
+  fill(0,0,0)
+  square(760, 205, 722, 10)
+  image(ImagesSel[1], 766,210)
+  fill(230)
+  textSize(75)
+  text("Selected: Gamplay", 790, 290)
+  textSize(40)
+  fill(255,165,0)
+  text("Medium", 1030, 350)
+  playButton()
+}
+if(selectedC == 1){
+  fill(0,0,120)
+  square(760, 205, 722, 10)
+  image(ImagesSel[2], 766,210)
+  fill(230)
+  textSize(80)
+  text("Selected: Flags", 825, 290)
+  textSize(40)
+  fill(255,0,0)
+  text("Hard", 1060, 350)
+  playButton()
+}
+if(selectedD == 1){
+  fill(70,70,0)
+  square(760, 205, 722, 10)
+  image(ImagesSel[3], 766,210)
+  fill(230)
+  textSize(50)
+  text("Selected: Historic Borders", 805, 290)
+  textSize(40)
+  fill(200,0,255)
+  text("Insane", 1050, 350)
+  playButton()
+}
+
 
 if(ongoinggame == 1) {
   fill(0,140,150)
@@ -167,7 +207,7 @@ if(ongoinggame == 1) {
 // text(selectedD, 800, 140)
 
 if( ongoinggame == 1 ){
-
+homeButton()
 fill(255)
 
 fill(answerA)
@@ -269,7 +309,9 @@ function mouseClicked() {
   vragenlijst[vraag].antwoord = 3
   }
 
-  
+  if (mouseX >= 20 && mouseX <= 310 && mouseY >= 10 && mouseY <= 110){
+    ongoinggame = 0}
+
 }
   function playButton() {
     
@@ -283,4 +325,41 @@ function mouseClicked() {
   fill(0)
   noStroke()
   text("Play", 1060, 810)
+}
+
+
+function homeButton(){
+   if (mouseX >= 20 && mouseX <= 310 && mouseY >= 10 && mouseY <= 110){
+    fill(190,0,0)}
+    else{fill(250,0,0)}
+  stroke(0)
+  strokeWeight(5)
+  rect(10,10,300,100,10)
+  noStroke()
+  textSize(30)
+  fill(0)
+  textFont("Palatino")
+  text("Back To Home.", 105,85)
+
+  // Little House
+  
+  stroke(0)
+  strokeWeight(4)
+  
+  line(30,90,50,90)
+  line(70,90,90,90)
+  line(52,70,68,70)
+  line(52,70,52,90)
+  line(68,70,68,90)
+  line(30,60,30,90)
+  line(90,60,90,90)
+
+  line(20,60,60,25)
+  line(100,60,60,25)
+
+  line(35,39,35,25)
+  line(35,25,42,25)
+  line(44,30,44,25)
+
+  noStroke()
 }
