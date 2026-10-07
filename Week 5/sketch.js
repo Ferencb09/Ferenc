@@ -1,18 +1,20 @@
 let vragenlijst = [];
-let ongoinggame = 1;    // 1 = logo's, 2 = gameplay, 3 = flags, 4 = historic borders, 0 = no game is active
+let ongoinggame = 0;    // 1 = logo's, 2 = gameplay, 3 = flags, 4 = historic borders, 0 = no game is active
 
 function setup() {
   createCanvas(1500, 950);
   let vraag = { 
       vraag: "Which logo is this?",
-      antwoorden: ["A. Apple", "B. Samsung", "C. Xiaomi", "D. Huawei"]  
+      antwoorden: ["A. Apple", "B. Samsung", "C. Xiaomi", "D. Huawei"],
+      antwoord: (3)
    }
 
    vragenlijst.push( vraag );
 
    vraag = { 
       vraag: "Which logo is this?",
-      antwoorden: ["A. C1000", "B. Plus", "C. Spar", "D. Dekamarkt"]  
+      antwoorden: ["A. C1000", "B. Plus", "C. Spar", "D. Dekamarkt"],
+      antwoord: (2)
    }
 
    vragenlijst.push( vraag );
@@ -21,10 +23,13 @@ function setup() {
   
 }
 
+let welkeVraag = 0
 
 
-
-
+let answerA = 180
+let answerB = 180
+let answerC = 180
+let answerD = 180
 let StrokeA = 0
 let StrokeB = 0
 let StrokeC = 0
@@ -144,11 +149,13 @@ if(selectedA == 1){
   textSize(80)
   text("Selected: Logo's", 800, 290)
   textSize(40)
+  fill(0,255,0)
+  text("Easy", 1060, 350)
   playButton()
 }
 
 if(ongoinggame == 1) {
-  fill(200)
+  fill(0,140,150)
   rect(0, 0, 1500, 950)
 }
 
@@ -159,17 +166,48 @@ if(ongoinggame == 1) {
 // text(selectedC, 800, 110)
 // text(selectedD, 800, 140)
 
+if( ongoinggame == 1 ){
 
-let welkeVraag = 0;
+fill(255)
+
+fill(answerA)
+  if (mouseX >= 630 && mouseX <= 870 && mouseY >= 350 && mouseY <= 450) {
+    fill(answerA+20)
+  }
+  else{fill(answerA)}
+rect(630, 350, 240, 100, 10)
+  if (mouseX >= 630 && mouseX <= 870 && mouseY >= 470 && mouseY <= 570) {
+    fill(answerB+20)
+  }
+  else{fill(answerB)}
+rect(630, 470, 240, 100, 10)
+  if (mouseX >= 930 && mouseX <= 1170 && mouseY >= 350 && mouseY <= 450) {
+    fill(answerC+20)
+  }
+  else{fill(answerC)}
+rect(930, 350, 240, 100, 10)
+  if (mouseX >= 930 && mouseX <= 1170 && mouseY >= 470 && mouseY <= 570) {
+    fill(answerD+20)
+  }
+  else{fill(answerD)}
+rect(930, 470, 240, 100, 10)
+
+fill(100)
+rect(660,280,460,50,50)
+fill(200)
+rect(670,270,460,50,50)
+
+fill(0)
 text(vragenlijst[welkeVraag].vraag, 800, 300)
-text(vragenlijst[welkeVraag].antwoorden[0], 700, 400)
-text(vragenlijst[welkeVraag].antwoorden[1], 1000, 400)
-text(vragenlijst[welkeVraag].antwoorden[2], 700, 600)
-text(vragenlijst[welkeVraag].antwoorden[3], 1000, 600)
+text(vragenlijst[welkeVraag].antwoord, 700, 300)
+text(vragenlijst[welkeVraag].antwoorden[0], 650, 410)
+text(vragenlijst[welkeVraag].antwoorden[1], 950, 410)
+text(vragenlijst[welkeVraag].antwoorden[2], 650, 525)
+text(vragenlijst[welkeVraag].antwoorden[3], 950, 525)
 
 }
-
-// Mouse Clicked
+}
+// Mouse Clicked for menu
 
 function mouseClicked() {
   if(mouseX >= 50 && mouseX <= 700 && mouseY >= 185 && mouseY <= 345 && ongoinggame == 0) {
@@ -199,12 +237,46 @@ function mouseClicked() {
   selectedC = 0
   selectedD = 1
   }
-}
 
-function playButton() {
-  fill(0,255,0)
-  text("Easy", 1060, 350)
-  fill(0,200,0)
+// Play Button
+
+  if (mouseX >= 900 && mouseX <= 1320 && mouseY >= 750 && mouseY <= 850 && ongoinggame == 0){
+    ongoinggame = 1
+    welkeVraag = 0
+  }
+
+  
+ 
+  
+// Mouse inputs Answers
+
+ if (mouseX >= 630 && mouseX <= 870 && mouseY >= 350 && mouseY <= 450) {
+  vragenlijst[vraag].antwoord = 0
+  }
+  
+
+  if (mouseX >= 630 && mouseX <= 870 && mouseY >= 470 && mouseY <= 570) {
+  vragenlijst[vraag].antwoord = 1
+  }
+
+
+  if (mouseX >= 930 && mouseX <= 1170 && mouseY >= 350 && mouseY <= 450) {
+  vragenlijst[vraag].antwoord = 2
+  }
+
+
+  if (mouseX >= 930 && mouseX <= 1170 && mouseY >= 470 && mouseY <= 570) {
+  vragenlijst[vraag].antwoord = 3
+  }
+
+  
+}
+  function playButton() {
+    
+  if (mouseX >= 900 && mouseX <= 1320 && mouseY >= 750 && mouseY <= 850){
+    fill(0,255,0)
+  }
+  else{fill(0,200,0)}
   stroke(0)
   strokeWeight(5)
   rect(900, 750, 420, 100)
