@@ -1,21 +1,20 @@
 function setup() {
-  createCanvas(800, 600);
+  createCanvas(1200, 800);
   maakKunst();
 }
 
 function maakKunst() {
   background(255);
-
   for (let i = 0; i < 100; i++) {
     let x = random(width);
-    let y = random(height);
+    let y = random(height);z
 
     let kleurR = random(255);
     let kleurG = random(255);
     let kleurB = random(255);
 
     fill(kleurR, kleurG, kleurB);
-    noStroke();
+    stroke(10);
 
     let vorm = floor(random(4));
 

@@ -6,7 +6,7 @@ function setup() {
 function draw() {
   background(150);
 
-  // Dobbelsteen
+  // dice
   fill(120)
   strokeWeight(0)
   square(710, 710, 210, 10)
@@ -24,7 +24,7 @@ function draw() {
 
 
 
-  // Naam
+  // Name
     fill(0,0,100)
 
   strokeWeight(1)
@@ -32,7 +32,7 @@ function draw() {
   textAlign(LEFT, BASELINE);
   textFont('Georgia');
 
-  let s = "Ferenc.";
+  let s = "Ferenc";
   let x = 50, y = 120;
   text(s, x, y);
 
