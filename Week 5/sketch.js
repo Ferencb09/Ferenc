@@ -29,7 +29,70 @@ function setup() {
 
    vragenlijst.push( vraag );
 
+      vraag = { 
+      vraag: "Which old logo is this?",
+      antwoorden: ["A. Domino's", "B. New York Pizza", "C. Starbucks", "D. Mcdonalds"],
+      antwoord: (1)
+   }
+
+   vragenlijst.push( vraag );
+
+      vraag = { 
+      vraag: "Which old logo is this?",
+      antwoorden: ["A. Fanta", "B. Pizza Hut", "C. Pepsi", "D. Coca Cola"],
+      antwoord: (3)
+   }
+
+   vragenlijst.push( vraag );
+
+         vraag = { 
+      vraag: "Which old logo is this?",
+      antwoorden: ["A. Lamborghini", "B. Ferrari", "C. Volkswagen", "D. Porsche"],
+      antwoord: (4)
+   }
+
+   vragenlijst.push( vraag );
+
+      vraag = { 
+      vraag: "Which old logo is this?",
+      antwoorden: ["A. Citroén", "B. Audi", "C. BMW", "D. Seat"],
+      antwoord: (2)
+   }
+
+   vragenlijst.push( vraag );
+
+      vraag = { 
+      vraag: "Which old logo is this?",
+      antwoorden: ["A. Milka", "B. Kit-Kat", "C. Toblerone", "D. Snickers"],
+      antwoord: (3)
+   }
+
+   vragenlijst.push( vraag );
+
+      vraag = { 
+      vraag: "Which old logo is this?",
+      antwoorden: ["A. Nike", "B. Adidas", "C. Skechers", "D. Levi's"],
+      antwoord: (2)
+   }
+
+   vragenlijst.push( vraag );
+
+   vraag = { 
+      vraag: "Which old logo is this?",
+      antwoorden: ["A. Logitech", "B. OMEN", "C. MSI", "D. Victus"],
+      antwoord: (4)
+   }
+
+   vragenlijst.push( vraag );
+   vraag = { 
+      vraag: "Did you like the quiz?",
+      antwoorden: ["A. Very Much!", "B. Its Fine", "C. Yes but cooler", "D. Nope, you suck!"],
+      antwoord: (4)
+   }
+
+   vragenlijst.push( vraag );
   
+  controleFase = 0
   
 }
 
@@ -50,6 +113,9 @@ let selectedB =  0
 let selectedC =  0
 let selectedD =  0
 let ImagesSel = [];
+let ImagesLogo = [];
+
+
 
 function preload() {
   Images.push(loadImage("Afbeeldingen/logojpeg.jpg"))
@@ -62,7 +128,20 @@ function preload() {
   ImagesSel.push(loadImage("Afbeeldingen/bordersel.jpg"))
 
   // Logo's
-  Images.push(loadImage("Afbeeldingen/logo/Xiaomi.png"))
+  ImagesLogo.push(loadImage("Afbeeldingen/logo/error.jpg"))
+   ImagesLogo.push(loadImage("Afbeeldingen/logo/Xiaomi.png"))
+   ImagesLogo.push(loadImage("Afbeeldingen/logo/C1000.png"))
+   ImagesLogo.push(loadImage("Afbeeldingen/logo/Q8.png"))
+
+    ImagesLogo.push(loadImage("Afbeeldingen/logo/dominos.png"))
+    ImagesLogo.push(loadImage("Afbeeldingen/logo/pepsi.png"))
+    ImagesLogo.push(loadImage("Afbeeldingen/logo/porsche.png"))
+    ImagesLogo.push(loadImage("Afbeeldingen/logo/audi.png"))
+    ImagesLogo.push(loadImage("Afbeeldingen/logo/toblerone.png"))
+    ImagesLogo.push(loadImage("Afbeeldingen/logo/adidas.png"))
+    ImagesLogo.push(loadImage("Afbeeldingen/logo/victus.png"))
+
+ImagesLogo.push(loadImage("Afbeeldingen/logo/error.jpg"))
 
 }
 
@@ -223,21 +302,21 @@ if( ongoinggame == 1 ){
 homeButton()
 
 fill(answerA)
-  if (mouseX >= 630 && mouseX <= 870 && mouseY >= 350 && mouseY <= 450 && controleFase == 0) {
+  if (mouseX >= 630 && mouseX <= 870 && mouseY >= 350 && mouseY <= 450 && controleFase == 0 && gegevenAntwoord != 1) {
     fill(answerA+20)
   } else if(gegevenAntwoord == 1){
     fill(answerA+60)
   }
   else{fill(answerA)}
 rect(630, 350, 240, 100, 10)
-  if (mouseX >= 630 && mouseX <= 870 && mouseY >= 470 && mouseY <= 570 && controleFase == 0) {
+  if (mouseX >= 630 && mouseX <= 870 && mouseY >= 470 && mouseY <= 570 && controleFase == 0 && gegevenAntwoord != 3) {
     fill(answerB+20)
   } else if(gegevenAntwoord == 3){
     fill(answerB+60)
   }
   else{fill(answerB)}
 rect(630, 470, 240, 100, 10)
-  if (mouseX >= 930 && mouseX <= 1170 && mouseY >= 350 && mouseY <= 450 && controleFase == 0) {
+  if (mouseX >= 930 && mouseX <= 1170 && mouseY >= 350 && mouseY <= 450 && controleFase == 0 && gegevenAntwoord != 2) {
     fill(answerC+20)
   }
   else if(gegevenAntwoord == 2){
@@ -245,7 +324,7 @@ rect(630, 470, 240, 100, 10)
   }
   else{fill(answerC)}
 rect(930, 350, 240, 100, 10)
-  if (mouseX >= 930 && mouseX <= 1170 && mouseY >= 470 && mouseY <= 570 && controleFase == 0) {
+  if (mouseX >= 930 && mouseX <= 1170 && mouseY >= 470 && mouseY <= 570 && controleFase == 0 && gegevenAntwoord != 4) {
     fill(answerD+20)
   } else if(gegevenAntwoord == 4){
     fill(answerD+60)
@@ -294,17 +373,30 @@ stroke(100)
 strokeWeight(5)
 rect(1180,800,300,130,10)
 if(controleFase == 0){
+  noStroke()
+  fill(255)
   text("Correct Answer", 1225, 875)
 }
-else{text("Next Answer", 1250, 875)}
+
+else{ fill(255)
+  noStroke()
+  text("Next Question", 1240, 875)}
 
 //text(controleFase, 400, 100)
 
-image(Images[4], 70,260)
+image(ImagesLogo[welkeVraag+1], 70,220)
 }
 
-
-
+// text(welkeVraag, 200, 200)
+if(welkeVraag >= 10 && ongoinggame == 1){
+  console.log("Test")
+  fill(200)
+  rect(-20,-20,1600,1000)
+  fill(0)
+  text("you've done it!", 400, 400)
+  homeButton()
+}
+ 
 }
 // Mouse Clicked for menu
 
@@ -383,6 +475,7 @@ if(mouseX >= 1180 && mouseX <= 1180+300 && mouseY >= 800 && mouseY <= 800+130 &&
 else if(mouseX >= 1180 && mouseX <= 1180+300 && mouseY >= 800 && mouseY <= 800+130 && controleFase == 1) {
   controleFase = 0
   welkeVraag++
+  gegevenAntwoord = 0
 }
  
 
