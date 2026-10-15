@@ -1,5 +1,5 @@
 // Config
-let timeSpeed = 2000    //Default = 2000     Time is by miliseconds (how many miliseconds per in-game minute)
+let timeSpeed = 2000   //Default = 2000     Time is by miliseconds (how many miliseconds per in-game minute)
 
 // Variable's & Array's
 
@@ -15,7 +15,7 @@ let clockX = 1500;
 let previousTime = 0;
 let timeMin = 0
 let timeHour = 7
-let day = 0
+let currentDay = 0
 
 // Digital Clock
 let digitalClockMinutesTextX = 0
@@ -27,13 +27,18 @@ let digitalClockHoursTextX = 0
 
 function setup() {
   createCanvas(1850, 1020);
+  timeHour = getItem("hour")
+  timeMin = getItem("min")
+  currentDay = getItem("dayCount")
+
 }
+
 
 function draw() {
 let hoekMin = map(timeMin, 0, 60, -90, 270);
 let hoekHour = map((timeHour % 12) + timeMin / 60, 0, 12, -90, 270);
 
-  background("#7f7f7f");
+  background("#b1b1b1");
 
 // Stone O' Meter
 
@@ -62,7 +67,7 @@ rect(925,175,400,80)
 textSize(20)
 fill(0)
 strokeWeight(0)
-text("Drunk O' Meter", 1185,275)
+text("Drunk O' Meter", 1185,280)
 
 
 // Time
@@ -129,7 +134,7 @@ if (timeMin >= 60) {
  
 if (timeHour >= 24) {
       timeHour = 0;
-      day++
+      currentDay++
    
     }
   }
@@ -139,7 +144,7 @@ textSize(40)
 stroke(0)
 strokeWeight(0)
 text("day:", 1560, 140)
-text(day, 1640, 143)
+text(currentDay, 1640, 143)
 
 // LineHour
   stroke(100);
@@ -161,5 +166,62 @@ text(day, 1640, 143)
 
 line(1500,80,1500,80)
 
+// saving system
+
+ storeItem("hour", timeHour);
+ storeItem("min", timeMin)
+ storeItem("dayCount", currentDay)
+ 
+fill(255)
+stroke(0)
+
+// Buttons
+
+rect(40,250,400,100)
+rect(40,400,400,100)
+rect(40,550,400,100)
+rect(40,700,400,100)
+
+rect(1410,250,400,100)
+rect(1410,400,400,100)
+rect(1410,550,400,100)
+rect(1410,700,400,100)
+
+// Text Buttons
+
+strokeWeight(0)
+fill(0)
+
+text("Go to bed", 50, 310)
+text("Eat food", 50, 460)
+text("Drink water", 50, 610)
+text("Go to doctor", 50, 760)
+
+text("Drink beer", 1420, 310)
+text("Smoke weed", 1420, 460)
+text("Go to work", 1420, 610)
+text("Go to the dealer", 1420, 760)
+
+// stats
+strokeWeight(2)
+fill(255)
+
+rect(90,30,200,20,7)
+rect(90,90,200,20,7)
+rect(90,150,200,20,7)
+
+
+// humanoid
+
+fill(255)
+strokeWeight(5)
+
+circle(900, 500, 400)
+
+
+}
+
+
+function mouseClicked(){
 
 }
