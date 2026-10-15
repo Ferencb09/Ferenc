@@ -3,13 +3,23 @@ let timeSpeed = 2000   //Default = 2000     Time is by miliseconds (how many mil
 
 // Variable's & Array's
 
+// Stats
 
+let energy = 100
+
+let food = 100
+
+let thirst = 100
+
+let health = 100
+
+let cash = 999999
 
 // Time
 
 // CLock
 let clockY = 80;
-let clockX = 1500;
+let clockX = 1450;
 
 // Time
 let previousTime = 0;
@@ -74,55 +84,55 @@ text("Drunk O' Meter", 1185,280)
 
 textSize(60)
 fill(0)
-text(":", 1620, 100)
+text(":", 1610, 90)
 
 if(timeHour <= 9){
   textSize(60)
   fill(0)
-  digitalClockHoursTextX = 1585
-  text("0", 1555, 100)
+  digitalClockHoursTextX = 1575
+  text("0", 1545, 90)
 }
 
 else{
   textSize(60)
   fill(0)
-  digitalClockHoursTextX = 1550
+  digitalClockHoursTextX = 1540
 }
 
 if(timeMin <= 9){
   textSize(60)
   fill(0)
-  digitalClockMinutesTextX = 1670
-  text("0", 1640, 100)
+  digitalClockMinutesTextX = 1660
+  text("0", 1630, 90)
 }
 else{
-  digitalClockMinutesTextX = 1640
+  digitalClockMinutesTextX = 1630
 }
 
 
 // Hour
 textSize(60)
 fill(0)
-text(timeHour, digitalClockHoursTextX, 100)
+text(timeHour, digitalClockHoursTextX, 90)
 
 // Min
 textSize(60)
 fill(0)
-text(timeMin, digitalClockMinutesTextX, 100)
+text(timeMin, digitalClockMinutesTextX, 90)
 
 // Clock
 fill(255)
 strokeWeight(7)
 stroke(0)
-circle(1500, 80, 100)
+circle(1450, 80, 100)
 
 fill(0)
 strokeWeight(5)
-line(1500, 30, 1500, 45)
-line(1500, 115, 1500, 130)
+line(1450, 30, 1450, 45)
+line(1450, 115, 1450, 130)
 
-line(1450, 80, 1465, 80)
-line(1550, 80, 1535, 80)
+line(1400, 80, 1415, 80)
+line(1500, 80, 1485, 80)
 
 if (millis() - previousTime >= timeSpeed) {
   timeMin++;
@@ -164,7 +174,7 @@ text(currentDay, 1640, 143)
     clockY + sin(radians(hoekMin)) * 40
   );
 
-line(1500,80,1500,80)
+line(1450,80,1450,80)
 
 // saving system
 
@@ -206,9 +216,78 @@ text("Go to the dealer", 1420, 760)
 strokeWeight(2)
 fill(255)
 
-rect(90,30,200,20,7)
-rect(90,90,200,20,7)
-rect(90,150,200,20,7)
+strokeWeight(0)
+textSize(20)
+fill(0)
+text("Energy", 30, 25)
+text("Food", 30, 85)
+text("Thirst", 30, 145)
+text("Health", 270, 25)
+
+
+strokeWeight(2)
+fill(255)
+stroke("#999b16")
+rect(30,30,200,20)
+stroke("#5e4500")
+rect(30,90,200,20)
+stroke("#0089b3")
+rect(30,150,200,20)
+stroke("#0fb300")
+rect(270,30,200,20)
+
+strokeWeight(0)
+rect(260,80,240,80)
+
+strokeWeight(4)
+
+stroke("#859210")
+fill("#e7ff0e")
+circle(300, 120, 60)
+fill(0)
+textSize(45)
+strokeWeight(0)
+text("$", 288, 135)
+text(cash, 340, 135)
+
+
+// bar
+fill("#fffb00")
+rect(30,30,energy*2,20)
+
+fill("#816518")
+rect(30,90,food*2,20)
+
+fill("#29f1ff")
+rect(30,150,thirst*2,20)
+
+fill("#29ff89")
+rect(270,30,health*2,20)
+
+
+// functional
+
+
+
+
+if(energy <= 0){
+  health -= 0.02
+}
+else if(energy >= 0 && energy <= 100){
+  energy -= 0.0005
+}
+if(food <= 0){
+  health -= 0.02
+}
+else if(food >= 0 && food <= 100){
+  food -= 0.0008
+}
+if(thirst <= 0){
+  health -= 0.02
+}
+else if(thirst >= 0 && thirst <= 100){
+  thirst -= 0.002
+}
 
 
 // humanoid
