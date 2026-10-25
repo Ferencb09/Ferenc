@@ -50,6 +50,7 @@ let Cno = 195;
 let WarningText = "Error!";
 let WarningTime = 0;
 let barY = 1020;
+let barX = 120
 
 
 
@@ -395,8 +396,8 @@ else{Cno = 195}
   stroke(0)
   fill(100)
   
-  rect(300,240,1200,500,20)
   
+  rect(300,240,1200,500,20)
   
   fill(0,Cyes,0)
   rect(320,550,400,170,20)
@@ -446,8 +447,23 @@ fill(0)
 text(d + "/" + m + "/" + currentYear, 180, barY+65);
 text(nf(h, 2) + ":" + nf(min, 2) + ":" + nf(s, 2), 370, barY+65);
 
-fill(150)
-rect(25,barY+15,120,100,100)
+
+if(mouseY >= 900 && mouseX <= 590 && barX <= 540){
+   barX += 17.9
+}
+else if(barX >= 120 && (mouseX >= 590 || mouseY <= 900 && mouseX <= 590)){
+  barX -= 17.9
+}
+
+stroke(140)
+if(barX >= 120){strokeWeight(5)}
+fill(170)
+rect(26,barY+15,barX,100,100)
+fill(140)
+strokeWeight(5)
+rect(26,barY+15,120,100,100)
+
+
 
 
 
@@ -478,8 +494,8 @@ if(mouseX >= 40 && mouseX <= 440 && mouseY >= 250 && mouseY <= 350 && (timeHour 
   energy = 100
   timeHour = 7
   timeMin = 0
-  
-if(timeHour >= 20 && timeHour <= 24){
+}
+else if(timeHour >= 20 && timeHour <= 24){
   day++
 }
 }
@@ -508,7 +524,7 @@ if(mouseX >= 40 && mouseX <= 440 && mouseY >= 400 && mouseY <= 500 && food <= 10
   else{
   food += 20
   }
- }
+ 
 
 // Drink Beer
 
@@ -559,7 +575,6 @@ if(confirmation == true && Cyes == 255 && health == 100){
 }
 
 // Time Control
-
 
 
 
