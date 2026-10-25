@@ -13,7 +13,7 @@ let thirst = 100
 
 let health = 100
 
-let cash = 999999
+let cash = 10
 
 // Time
 
@@ -32,6 +32,14 @@ let digitalClockMinutesTextX = 0
 let digitalClockHoursTextX = 0
 
 
+// functions
+
+let confirmation = false
+let Cyes = 195
+let Cno = 195
+let WarningText = "Error!"
+let WarningTime = 0
+let barY = 1020
 
 
 
@@ -41,6 +49,12 @@ function setup() {
   timeMin = getItem("min")
   currentDay = getItem("dayCount")
 
+  thirst = getItem("Thirst")
+  energy = getItem("Energy")
+  food = getItem("Hunger")
+  health = getItem("Health")
+
+  cash = cash * 10
 }
 
 
@@ -49,6 +63,7 @@ let hoekMin = map(timeMin, 0, 60, -90, 270);
 let hoekHour = map((timeHour % 12) + timeMin / 60, 0, 12, -90, 270);
 
   background("#b1b1b1");
+
 
 // Stone O' Meter
 
@@ -181,6 +196,11 @@ line(1450,80,1450,80)
  storeItem("hour", timeHour);
  storeItem("min", timeMin)
  storeItem("dayCount", currentDay)
+
+ storeItem("Health", health)
+ storeItem("Hunger", food)
+ storeItem("Thirst", thirst)
+ storeItem("Energy", energy)
  
 fill(255)
 stroke(0)
@@ -252,7 +272,7 @@ text(cash, 340, 135)
 
 
 // bar
-fill("#fffb00")
+fill("#e5ff00")
 rect(30,30,energy*2,20)
 
 fill("#816518")
@@ -268,26 +288,39 @@ rect(270,30,health*2,20)
 // functional
 
 
-
-
-if(energy <= 0){
+if(energy <= 0 && health >= 0){
   health -= 0.02
 }
 else if(energy >= 0 && energy <= 100){
   energy -= 0.0005
 }
-if(food <= 0){
+if(food <= 0 && health >= 0){
   health -= 0.02
 }
 else if(food >= 0 && food <= 100){
   food -= 0.0008
 }
-if(thirst <= 0){
+if(thirst <= 0 && health >= 0){
   health -= 0.02
 }
 else if(thirst >= 0 && thirst <= 100){
   thirst -= 0.002
 }
+
+
+if(thirst <= 0 && food <= 0 && health >= 0){
+  health -= 0.08
+}
+else if(food <= 0 && energy <= 0 && health >= 0){
+  health -= 0.04
+}
+else if(thirst <= 0 && energy <= 0 && health >= 0){
+  health -= 0.04
+}
+else if(thirst <= 0 && energy <= 0 && food <= 0 && health >= 0){
+  health -= 0.16
+}
+
 
 
 // humanoid
@@ -297,10 +330,206 @@ strokeWeight(5)
 
 circle(900, 500, 400)
 
+// Death screen
+
+if(health <= 0){
+  fill(0,0,0,200)
+  rect(0,0,1850,1080)
+  fill(0)
+  stroke(100)
+  rect(0,300,1850,300)
+  fill(255)
+  strokeWeight(0)
+  textSize(100)
+  text("you died!", 680, 420)
+  fill(0,255,0)
+  strokeWeight(5)
+  stroke(0,100,0)
+  rect(620,480,528,100,20)
+  textSize(70)
+  strokeWeight(4)
+  fill(0)
+  stroke(100,200,100)
+  text("Play Again", 710, 550)
+  
+}
+if(confirmation == true){
+
+if(mouseX >= 320 &&  mouseX <= 720 &&  mouseY >= 550 &&  mouseY <= 720){
+     Cyes = 255
+  }
+else{Cyes = 195}
+
+if(mouseX >= 1080 &&  mouseX <= 1480 &&  mouseY >= 550 &&  mouseY <= 720){
+     Cno = 255
+  }
+else{Cno = 195}
+  
+
+
+  fill(0,0,0,200)
+  rect(0,0,2000,2000)
+  
+  strokeWeight(5)
+  stroke(0)
+  fill(100)
+  
+  rect(300,240,1200,500,20)
+  
+  
+  fill(0,Cyes,0)
+  rect(320,550,400,170,20)
+  fill(Cno,0,0)
+  rect(1080,550,400,170,20)
+
+  textSize(75)
+  fill(0)
+  strokeWeight(1)
+  text("Yes",440,660)
+  text("Cancel",1150,660)
+  
+  text("This costs $50, Are you sure?",410,400)
+  
+  
+ }
+
+
+fill(0)
+if(confirmation == true) {fill(255)}
+stroke(0)
+strokeWeight(0)
+textSize(20)
+text("mouseX: " +  mouseX, 100, 200)
+text("mouseY: " +  mouseY, 100,220)
+
+
+
+if(mouseY >= 800 && barY >= 900){
+  barY -= 20
+}
+else if(mouseY <= 800 && barY <= 1020) {barY += 10}
+else if(barY < 900 && mouseY <= 800) {barY = 900}
+
+rect(0,barY,1850,200)
+
+fill(200)
+rect(20,barY+10,160,110,30)
+rect(190,barY+20,110,90,20)
+rect(310,barY+20,110,90,20)
+rect(430,barY+20,110,90,20)
+
+
+
+
+
+
+
 
 }
 
 
 function mouseClicked(){
+  // Cheats / Debug
+if(mouseX >= 0 && mouseX <= 50 && mouseY >= 0 && mouseY <= 50){
+  health = 100
+  thirst = 100
+  food = 100
+  energy = 100
+}
+if(mouseX >= 1800 && mouseX <= 1850 && mouseY >= 0 && mouseY <= 50){
+ timeHour = 21
+ timeMin = 30
+ thirst = 10
+ food = 10
+ energy = 10
+}
+
+// Sleep
+
+if(confirmation == false){
+
+if(mouseX >= 40 && mouseX <= 440 && mouseY >= 250 && mouseY <= 350 && (timeHour <= 6 || timeHour >= 20) && energy <= 50){
+  energy = 100
+  timeHour = 7
+  timeMin = 0
+  
+if(timeHour >= 20 && timeHour <= 24){
+  day++
+}
+}
+
+// Drink Water
+
+if(mouseX >= 40 && mouseX <= 440 && mouseY >= 550 && mouseY <= 650 && thirst <= 100){
+  if(thirst >= 80){
+    let som = 0;
+    som = 100 - thirst
+    thirst += som
+  }
+  else{
+  thirst += 20
+  }
+}
+
+// Eat Food
+
+if(mouseX >= 40 && mouseX <= 440 && mouseY >= 400 && mouseY <= 500 && food <= 100){
+   if(food >= 80){
+    let som = 0;
+    som = 100 - food
+    food += som
+  }
+  else{
+  food += 20
+  }
+ }
+
+// Drink Beer
+
+// Smoke Weed
+
+// Go to Work
+
+// Dealer
+
+
+
+}
+
+
+
+// Go to doctor
+
+if(mouseX >= 40 && mouseX <= 440 && mouseY >= 700 && mouseY <= 800){
+confirmation = true
+
+
+}
+
+if(confirmation == true && Cyes == 255 && cash >= 50 && health < 100){
+  cash -= 50
+  health = 100
+  timeHour += 1
+  confirmation = false
+  Cyes = 195
+  Cno = 195
+}
+if(confirmation == true && Cno == 255){
+  confirmation = false
+  Cyes = 195
+  Cno = 195
+}
+
+
+if(confirmation == true && Cyes == 255 && cash < 50){
+  confirmation = false
+  Cyes = 195
+  Cno = 195
+}
+if(confirmation == true && Cyes == 255 && health == 100){
+  confirmation = false
+  Cyes = 195
+  Cno = 195
+}
 
 }
