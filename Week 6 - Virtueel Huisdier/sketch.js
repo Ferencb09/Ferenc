@@ -506,6 +506,11 @@ line(105,barY+90,105,barY+35)
 } else{
 triangle(70,barY+95,110,barY+65,70,barY+35)}
 
+// expressions
+
+if(high >= 50){
+  image(Images[5],700,300,400)
+}
 
 
 }
@@ -569,7 +574,8 @@ if(mouseX >= 40 && mouseX <= 440 && mouseY >= 400 && mouseY <= 500 && food <= 10
 
 // Drink Beer
 if(mouseX >= 1410 && mouseX <= 1810 && mouseY >= 250 && mouseY <= 350 && beers >= 1){
-  drunk += 20
+  if(drunk <= 380){
+  drunk += 20}
   beers -= 1
   health -= 5
 }
@@ -578,7 +584,8 @@ if(mouseX >= 1410 && mouseX <= 1810 && mouseY >= 250 && mouseY <= 350 && beers >
 // Smoke Weed
 
 if(mouseX >= 1410 && mouseX <= 1810 && mouseY >= 400 && mouseY <= 500 && weed >= 1){
-  high += 20
+  if(high <= 780){
+  high += 20}
   weed -= 1
   health += 5
 } 
@@ -604,7 +611,6 @@ if(confirmation == true && Cyes == 255 && health < 100 && cash >= 50){
   } else {
     health = 100;
   }
-  timeHour += 1
   confirmation = false
   Cyes = 195
   Cno = 195
