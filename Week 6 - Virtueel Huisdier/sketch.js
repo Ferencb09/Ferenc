@@ -29,11 +29,11 @@ let health = 100;
 
 let cash = 10;
 
-let weed = 0
+let weed = 100;
 
 let high = 0
 
-let beers = 5
+let beers = 500
 
 let drunk = 0
 
@@ -565,24 +565,29 @@ if(mouseX >= 40 && mouseX <= 440 && mouseY >= 400 && mouseY <= 500 && food <= 10
   else{
   food += 20
   }
- 
+}
 
 // Drink Beer
 if(mouseX >= 1410 && mouseX <= 1810 && mouseY >= 250 && mouseY <= 350 && beers >= 1){
   drunk += 20
-  beer -= 1
+  beers -= 1
+  health -= 5
 }
 
 
 // Smoke Weed
 
+if(mouseX >= 1410 && mouseX <= 1810 && mouseY >= 400 && mouseY <= 500 && weed >= 1){
+  high += 20
+  weed -= 1
+  health += 5
+} 
 // Go to Work
 
 // Dealer
 
 
 
-}
 
 
 
@@ -594,9 +599,11 @@ confirmation = true
 
 }
 
-if(confirmation == true && Cyes == 255 && cash >= 50 && health < 100){
+if(confirmation == true && Cyes == 255 && health < 100 && cash >= 50){
   cash -= 50
-  health = 100
+  } else {
+    health = 100;
+  }
   timeHour += 1
   confirmation = false
   Cyes = 195
@@ -636,5 +643,7 @@ if(mouseX >= 620 && mouseX <= 1150 && mouseY >= 480 && mouseY <= 580 && health =
 // Time Control
 
 
-
+// Respawn
+if(mouseX >= 620 && mouseX <= 620+528 && mouseY >= 480 && mouseY <= 580 && health <= 0){
+  health = 100;
 }
