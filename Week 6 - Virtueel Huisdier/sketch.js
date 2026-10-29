@@ -1,8 +1,22 @@
 // Config
 let timeSpeed = 2000;   //Default = 2000     Time is by miliseconds (how many miliseconds per in-game minute)
 
-// Variable's & Array's
+// Variable's & Array's\
 
+let Images = [];
+
+// PNG
+function preload(){
+Images.push(loadImage("Afbeeldingen/essentials/png/Angry.png"))
+Images.push(loadImage("Afbeeldingen/essentials/png/Happy.png"))
+Images.push(loadImage("Afbeeldingen/essentials/png/Sad.png"))
+Images.push(loadImage("Afbeeldingen/essentials/png/Sick.png"))
+Images.push(loadImage("Afbeeldingen/essentials/png/Tired.png"))
+Images.push(loadImage("Afbeeldingen/essentials/png/WeedLow.png"))
+Images.push(loadImage("Afbeeldingen/essentials/png/WeedMed.png"))
+Images.push(loadImage("Afbeeldingen/essentials/png/WeedHigh.png"))
+Images.push(loadImage("Afbeeldingen/essentials/png/WeedMax.png"))
+}
 // Stats
 
 let energy = 100;
@@ -14,6 +28,14 @@ let thirst = 100;
 let health = 100;
 
 let cash = 10;
+
+let weed = 0
+
+let high = 0
+
+let beers = 5
+
+let drunk = 0
 
 // Time
 
@@ -51,6 +73,7 @@ let WarningText = "Error!";
 let WarningTime = 0;
 let barY = 1020;
 let barX = 120
+let timepaused = 0
 
 
 
@@ -74,7 +97,7 @@ function draw() {
   // update IRL time
   currentYear = year();
   m = month();
-  d = day();
+  d = 29  ;
   
   h = hour();
   min = minute();
@@ -94,6 +117,9 @@ stroke("#156b2e")
 strokeWeight(10)
 rect(525,20,800,140)
 
+fill(0,255,0)
+rect(525,20,high,140)
+
 // Text Stone O' Meter
 
 textSize(40)
@@ -108,6 +134,9 @@ fill(255)
 stroke('#8c8939')
 strokeWeight(10)
 rect(925,175,400,80)
+
+fill(255,225,0)
+rect(925,175,drunk,80)
 
 // Text Drunk O' Meter
 
@@ -249,8 +278,8 @@ text("Eat food", 50, 460)
 text("Drink water", 50, 610)
 text("Go to doctor", 50, 760)
 
-text("Drink beer", 1420, 310)
-text("Smoke weed", 1420, 460)
+text("Drink beer" + "  (" + beers + ")", 1420, 310)
+text("Smoke weed" + "  (" + weed + ")", 1420, 460)
 text("Go to work", 1420, 610)
 text("Go to the dealer", 1420, 760)
 
@@ -412,7 +441,9 @@ else{Cno = 195}
   
   text("This costs $50, Are you sure?",410,400)
   
-  
+  if(mouseX >= 1410 && mouseX <= 1810 && mouseY >= 250 && mouseY <= 350){high = 80
+  console.log("yep")}
+  else{high = 0}
  }
 
 
@@ -421,8 +452,8 @@ if(confirmation == true) {fill(255)}
 stroke(0)
 strokeWeight(0)
 textSize(20)
-// text("mouseX: " +  mouseX, 100, 200)
-// text("mouseY: " +  mouseY, 100,220)
+text("mouseX: " +  mouseX, 100, 200)
+text("mouseY: " +  mouseY, 100,220)
 
 // pop-up bar
 
@@ -463,7 +494,17 @@ fill(140)
 strokeWeight(5)
 rect(26,barY+15,120,100,100)
 
+// Time control icons
+fill(0)
+stroke(0)
+strokeWeight(15)
 
+if(timepaused == 1){
+
+line(65,barY+90,65,barY+35)
+line(105,barY+90,105,barY+35)
+} else{
+triangle(70,barY+95,110,barY+65,70,barY+35)}
 
 
 
@@ -488,7 +529,7 @@ if(mouseX >= 1800 && mouseX <= 1850 && mouseY >= 0 && mouseY <= 50){
 
 // Sleep
 
-if(confirmation == false){
+if(confirmation == false && health != 0){
 
 if(mouseX >= 40 && mouseX <= 440 && mouseY >= 250 && mouseY <= 350 && (timeHour <= 6 || timeHour >= 20) && energy <= 100){
   energy = 100
@@ -527,6 +568,11 @@ if(mouseX >= 40 && mouseX <= 440 && mouseY >= 400 && mouseY <= 500 && food <= 10
  
 
 // Drink Beer
+if(mouseX >= 1410 && mouseX <= 1810 && mouseY >= 250 && mouseY <= 350 && beers >= 1){
+  drunk += 20
+  beer -= 1
+}
+
 
 // Smoke Weed
 
@@ -573,6 +619,19 @@ if(confirmation == true && Cyes == 255 && health == 100){
   Cyes = 195
   Cno = 195
 }
+
+
+if(mouseX >= 620 && mouseX <= 1150 && mouseY >= 480 && mouseY <= 580 && health == 0){
+  timeHour = 7
+  timeMin = 0
+  cash = 100
+  energy = 100
+  health = 100
+  thirst = 100
+  food = 100
+  day = 0
+}
+
 
 // Time Control
 
