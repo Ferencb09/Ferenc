@@ -508,8 +508,14 @@ triangle(70,barY+95,110,barY+65,70,barY+35)}
 
 // expressions
 
-if(high >= 50){
+if(high >= 50 && high < 150){
   image(Images[5],700,300,400)
+} else if (high >= 150 && high < 300){
+  image(Images[6],700,300,400)
+} else if (high >= 300 && high < 400) {
+  image(Images[7],700,300,400)
+} else if (high >= 400) {
+  image(Images[8],700,300,400)
 }
 
 
